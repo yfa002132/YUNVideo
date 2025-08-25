@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUNvideo 简单的在线式视频播放APP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-play-circle"></i>
+                <span>云视频</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">首页</a>
+                <a href="#features" class="nav-link">功能</a>
+                <a href="#screenshots" class="nav-link">截图</a>
+                <a href="#download" class="nav-link">下载</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- 英雄区域 -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>云视频</h1>
+                    <h2>全平台在线式视频播放APP</h2>
+                    <p>高清画质，片源丰富，更新及时</p>
+                    <div class="hero-buttons">
+                        <button class="download-btn primary">
+                            <i class="fas fa-download"></i>
+                              Android TV 立即下载
+                        </button>
+                        <button class="download-btn secondary">
+                            <i class="fab fa-apple"></i>
+                            其它平台（暂未开放）
+                        </button>
+                    </div>
+                    <div class="app-info">
+                        <span><i class="fas fa-star"></i> 4.8分</span>
+                        <span><i class="fas fa-download"></i> 20万+下载</span>
+                        <span><i class="fas fa-users"></i> 3万+用户</span>
+                    </div>
+                </div>
+                <div class="hero-carousel">
+                    <div class="carousel-container">
+                        <div class="carousel-slide active">
+                            <img src="images/video_playback.png" alt="云视频APP界面">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/movie_list.png" alt="电影列表界面">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/tv_series_list.png" alt="电视剧列表界面">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/anime_list.png" alt="动漫列表界面">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/playback_details.png" alt="播放详情界面">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/Recentlywatched.png" alt="最近观看界面">
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <div class="carousel-dots">
+                            <span class="dot active" onclick="currentSlide(1)"></span>
+                            <span class="dot" onclick="currentSlide(2)"></span>
+                            <span class="dot" onclick="currentSlide(3)"></span>
+                            <span class="dot" onclick="currentSlide(4)"></span>
+                            <span class="dot" onclick="currentSlide(5)"></span>
+                            <span class="dot" onclick="currentSlide(6)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 功能特性 -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2 class="section-title">强大功能</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h3>在线播放</h3>
+                        <p>海量在线视频资源，随时随地观看最新内容</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>高清观看</h3>
+                        <p>支持4K超高清以及转码画质，享受极致观影体验</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-closed-captioning"></i>
+                        </div>
+                        <h3>字幕支持</h3>
+                        <p>内置字幕功能，支持多语言字幕显示</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <h3>投屏功能</h3>
+                        <p>支持投屏到电视，享受大屏观影体验</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h3>多格式支持</h3>
+                        <p>支持MP4、AVI、MKV、MOV等多种视频格式，兼容性极强</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>安全可靠</h3>
+                        <p>无广告、无病毒，安全可靠的播放体验</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 应用截图 -->
+        <section id="screenshots" class="screenshots-section">
+            <div class="container">
+                <h2 class="section-title">应用截图</h2>
+                <div class="screenshots-grid">
+                    <div class="screenshot-card">
+                        <img src="images/movie_list.png" alt="电影列表">
+                        <div class="screenshot-info">
+                            <h4>电影列表</h4>
+                            <p>丰富的电影资源，分类清晰</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/tv_series_list.png" alt="电视剧列表">
+                        <div class="screenshot-info">
+                            <h4>电视剧列表</h4>
+                            <p>热门电视剧，更新及时</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/variety_show_list.png" alt="综艺列表">
+                        <div class="screenshot-info">
+                            <h4>综艺节目</h4>
+                            <p>精彩综艺，娱乐无限</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/anime_list.png" alt="动漫列表">
+                        <div class="screenshot-info">
+                            <h4>动漫专区</h4>
+                            <p>海量动漫，精彩纷呈</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/documentary_list.png" alt="纪录片列表">
+                        <div class="screenshot-info">
+                            <h4>纪录片</h4>
+                            <p>优质纪录片，增长知识</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/playback_details.png" alt="播放详情">
+                        <div class="screenshot-info">
+                            <h4>播放详情</h4>
+                            <p>详细播放信息，操作便捷</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 下载区域 -->
+        <section id="download" class="download-section">
+            <div class="container">
+                <div class="download-content">
+                    <div class="download-text">
+                        <h2>立即下载云视频</h2>
+                        <p>体验专业级的视频播放器，享受流畅的观影体验</p>
+                        <div class="download-info">
+                            <div class="info-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>快速下载，简单使用</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>支持Android 9.0+</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>文件大小：109.5MB</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>最新版本：v1.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="download-buttons">
+                        <button class="download-btn apk large">
+                            <i class="fas fa-download"></i>
+                            <div class="btn-text">
+                                <span class="btn-title">Android TV端APK下载</span>
+                                <span class="btn-subtitle">v2.1.0</span>
+                            </div>
+                        </button>
+                        <button class="download-btn primary large">
+                            <i class="fab fa-android-play"></i>
+                            <div class="btn-text">
+                                <span class="btn-title">Android手机端下载（暂未开放）</span>
+                                <span class="btn-subtitle">Android手机端下载（暂未开放）</span>
+                            </div>
+                        </button>
+                        <button class="download-btn secondary large">
+                            <i class="fab fa-apple"></i>
+                            <div class="btn-text">
+                                <span class="btn-title">IOS手机端下载（暂未开放）</span>
+                                <span class="btn-subtitle">IOS手机端下载（暂未开放）</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 用户评价 -->
+        <section class="reviews-section">
+            <div class="container">
+                <h2 class="section-title">用户评价</h2>
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="user-info">
+                                <img src="https://via.placeholder.com/50" alt="用户头像">
+                                <div>
+                                    <h4>张先生</h4>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"界面简洁美观，播放流畅，功能强大，是我用过最好的视频播放器！"</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="user-info">
+                                <img src="https://via.placeholder.com/50" alt="用户头像">
+                                <div>
+                                    <h4>李女士</h4>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"支持格式很多，字幕功能很实用，投屏效果也很好，强烈推荐！"</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="user-info">
+                                <img src="https://via.placeholder.com/50" alt="用户头像">
+                                <div>
+                                    <h4>王同学</h4>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"资源丰富，更新及时，界面友好，是追剧必备神器！"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>关于云视频</h4>
+                <p>专业的视频播放器应用，致力于为用户提供最佳的观影体验</p>
+            </div>
+            <div class="footer-section">
+                <h4>技术支持</h4>
+                <p>邮箱: yfa002132@gmail.com</p>
+                <p>Q频道: pd07898475</p>
+            </div>
+<!--            <div class="footer-section">-->
+<!--                <h4>关注我们</h4>-->
+<!--                <div class="social-links">-->
+<!--                    <a href="#"><i class="fab fa-weibo"></i></a>-->
+<!--                    <a href="#"><i class="fab fa-wechat"></i></a>-->
+<!--                    <a href="#"><i class="fab fa-qq"></i></a>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+<!--        <div class="footer-bottom">-->
+<!--            <p>&copy; 2024 云视频. 保留所有权利.</p>-->
+<!--        </div>-->
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
