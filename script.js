@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 显示确认对话框
                 if (confirm('确定开启下载？点击确定立即下载云视频APP')) {
                     // 用户点击确定后开始下载
-                    window.open('https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/release-v1.1/app-release.apk', '_blank');
+                    window.open('https://ghfast.top/https://github.com/yfa002132/YUNVideo/releases/download/v1.0.2/app-release.apk', '_blank');
                 }
             } else if (this.classList.contains('secondary')) {
                 console.log('其它平台按钮点击（暂未开放）');
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 显示确认对话框
                 if (confirm('确定开启下载？点击确定立即下载云视频APP')) {
                     // 用户点击确定后开始下载
-                    window.open('https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/release-v1.1/app-release.apk', '_blank');
+                    window.open('https://ghfast.top/https://github.com/yfa002132/YUNVideo/releases/download/v1.0.2/app-release.apk', '_blank');
                 }
             }
         });
