@@ -49,21 +49,29 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 根据按钮类型执行不同操作
             if (this.classList.contains('primary')) {
-                console.log('Android TV 下载确认');
+                // Android TV 下载确认
                 // 显示确认对话框
                 if (confirm('确定开启下载？点击确定立即下载云视频APP')) {
                     // 用户点击确定后开始下载
-                    window.open('https://ghfast.top/https://github.com/yfa002132/YUNVideo/releases/download/v1.0.2/app-release.apk', '_blank');
+                    const link = document.createElement('a');
+                    link.href = 'https://ghfast.top/https://github.com/yfa002132/YUNVideo/releases/download/v1.0.2/app-release.apk';
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.click();
                 }
             } else if (this.classList.contains('secondary')) {
-                console.log('其它平台按钮点击（暂未开放）');
+                // 其它平台按钮点击（暂未开放）
                 // 不执行任何操作，只保留点击动画效果
             } else if (this.classList.contains('apk')) {
-                console.log('Android TV APK下载确认');
+                // Android TV APK下载确认
                 // 显示确认对话框
                 if (confirm('确定开启下载？点击确定立即下载云视频APP')) {
                     // 用户点击确定后开始下载
-                    window.open('https://ghfast.top/https://github.com/yfa002132/YUNVideo/releases/download/v1.0.2/app-release.apk', '_blank');
+                    const link = document.createElement('a');
+                    link.href = 'https://ghfast.top/https://github.com/yfa002132/YUNVideo/releases/download/v1.0.2/app-release.apk';
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.click();
                 }
             }
         });
@@ -81,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 这里可以添加图片预览功能
             const img = this.querySelector('img');
-            console.log('查看截图:', img.alt);
+            // 查看截图: img.alt
         });
     });
 
@@ -109,9 +117,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 添加页面加载动画
+    // 添加页面加载动画 (排除截图卡片)
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.feature-card, .screenshot-card, .review-card, .download-content');
+        const elements = document.querySelectorAll('.feature-card, .review-card, .download-content');
         elements.forEach(element => {
             const elementTop = element.getBoundingClientRect().top;
             const elementVisible = 150;
@@ -123,11 +131,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // 初始化动画
-    document.querySelectorAll('.feature-card, .screenshot-card, .review-card, .download-content').forEach(element => {
+    // 初始化动画 (排除截图卡片，避免影响显示)
+    document.querySelectorAll('.feature-card, .review-card, .download-content').forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(30px)';
         element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    // 截图卡片单独处理，确保始终可见
+    document.querySelectorAll('.screenshot-card').forEach(element => {
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+        element.style.transition = 'transform 0.3s ease';
     });
 
     // 监听滚动事件
@@ -165,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             // ESC键关闭任何打开的模态框
-            console.log('关闭模态框');
+            // 关闭模态框
         }
         
         // 方向键导航
@@ -208,17 +223,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // 添加页面可见性API支持
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            console.log('页面隐藏');
+            // 页面隐藏
         } else {
-            console.log('页面显示');
+            // 页面显示
         }
     });
 
     // 添加性能监控
     window.addEventListener('load', function() {
-        setTimeout(() => {
-            console.log('页面加载完成时间:', performance.now());
-        }, 0);
+        // 页面加载性能监控
+        // setTimeout(() => {
+        //     console.log('页面加载完成时间:', performance.now());
+        // }, 0);
     });
 
     // 添加错误处理
@@ -226,11 +242,56 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('页面错误:', e.error);
     });
 
-    console.log('云视频APP介绍页面已加载完成！');
+    // 初始化移动端菜单功能
+    initializeMobileMenu();
+    
+    // 云视频APP介绍页面已加载完成
+});
+
+// 移动端菜单切换函数
+function toggleMobileMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    const navToggle = document.querySelector('.nav-toggle');
+    
+    navMenu.classList.toggle('active');
+    navToggle.classList.toggle('active');
+}
+
+// 移动端菜单功能 - 合并到主DOMContentLoaded中
+function initializeMobileMenu() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navMenu = document.querySelector('.nav-menu');
+    const navToggle = document.querySelector('.nav-toggle');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // 在移动端点击链接后关闭菜单
+            if (window.innerWidth <= 768) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+    });
+    
+    // 点击页面其他区域关闭移动端菜单
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav-container') && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        }
+    });
+    
+    // 窗口大小改变时处理菜单状态
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        }
+    });
     
     // 显示欢迎消息
     setTimeout(() => {
-        console.log('欢迎来到云视频APP介绍页面！');
+        // 欢迎来到云视频APP介绍页面
     }, 1000);
 
     // 轮播图功能
@@ -291,6 +352,9 @@ document.addEventListener('DOMContentLoaded', function() {
         carousel.addEventListener('mouseleave', startAutoPlay);
     }
 
+    // 确保第一张图片显示
+    showSlide(0);
+    
     // 开始自动播放
     startAutoPlay();
 
@@ -306,4 +370,119 @@ document.addEventListener('DOMContentLoaded', function() {
     window.currentSlide = function(index) {
         goToSlide(index);
     };
-});
+    
+    // 移动端优化：防止iOS Safari地址栏隐藏时的高度问题
+    function updateViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    updateViewportHeight();
+    window.addEventListener('resize', updateViewportHeight);
+    window.addEventListener('orientationchange', function() {
+        setTimeout(updateViewportHeight, 500); // 延迟更新，等待旋转完成
+    });
+    
+    // 移动端滑动优化
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStartY = e.changedTouches[0].screenY;
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartY - touchEndY;
+        
+        // 向上滑动，滚动到下一个section
+        if (diff > swipeThreshold) {
+            const sections = document.querySelectorAll('section[id]');
+            const currentScrollTop = window.scrollY;
+            
+            for (let i = 0; i < sections.length; i++) {
+                if (sections[i].offsetTop > currentScrollTop + 100) {
+                    sections[i].scrollIntoView({ behavior: 'smooth' });
+                    break;
+                }
+            }
+        }
+        
+        // 向下滑动，滚动到上一个section
+        if (diff < -swipeThreshold) {
+            const sections = document.querySelectorAll('section[id]');
+            const currentScrollTop = window.scrollY;
+            
+            for (let i = sections.length - 1; i >= 0; i--) {
+                if (sections[i].offsetTop < currentScrollTop - 100) {
+                    sections[i].scrollIntoView({ behavior: 'smooth' });
+                    break;
+                }
+            }
+        }
+    }
+    
+    // 移动端图片懒加载优化 (排除轮播图和截图区域)
+    const images = document.querySelectorAll('img:not(.carousel-slide img):not(.screenshot-card img)');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                // 检查是否是轮播图或截图中的图片，如果是则跳过
+                if (img.closest('.carousel-slide') || img.closest('.screenshot-card')) {
+                    observer.unobserve(img);
+                    return;
+                }
+                
+                // 检查图片是否已经加载完成
+                if (img.complete && img.naturalWidth > 0) {
+                    img.style.opacity = '1';
+                } else {
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.3s ease';
+                    img.onload = () => {
+                        img.style.opacity = '1';
+                    };
+                }
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => {
+        // 只对非轮播图和非截图图片应用懒加载
+        if (!img.closest('.carousel-slide') && !img.closest('.screenshot-card')) {
+            imageObserver.observe(img);
+        }
+    });
+    
+    // 移动端性能优化：减少动画频率
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            // 重置动画状态 (排除截图卡片)
+            const animatedElements = document.querySelectorAll('.feature-card, .review-card');
+            animatedElements.forEach(element => {
+                element.style.transform = 'translateY(30px)';
+                element.style.opacity = '0';
+            });
+            
+            // 确保截图卡片始终可见
+            document.querySelectorAll('.screenshot-card').forEach(element => {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            });
+            
+            // 重新触发动画
+            setTimeout(animateOnScroll, 100);
+        }, 250);
+    });
+}
+
+// 在主DOMContentLoaded中调用移动端菜单初始化
