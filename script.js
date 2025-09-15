@@ -47,33 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.style.transform = '';
             }, 150);
             
-            // 根据按钮类型执行不同操作
-            if (this.classList.contains('primary')) {
-                // Android TV 下载确认
-                // 显示确认对话框
-                if (confirm('确定开启下载？点击确定立即下载云视频APP')) {
-                    // 用户点击确定后开始下载
-                    const link = document.createElement('a');
-                    link.href = 'https://ghfast.top/https://github.com/yfa002132/YUNVideo/releases/download/v1.0.2/app-release.apk';
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                    link.click();
-                }
-            } else if (this.classList.contains('secondary')) {
-                // 其它平台按钮点击（暂未开放）
-                // 不执行任何操作，只保留点击动画效果
-            } else if (this.classList.contains('apk')) {
-                // Android TV APK下载确认
-                // 显示确认对话框
-                if (confirm('确定开启下载？点击确定立即下载云视频APP')) {
-                    // 用户点击确定后开始下载
-                    const link = document.createElement('a');
-                    link.href = 'https://ghfast.top/https://github.com/yfa002132/YUNVideo/releases/download/v1.0.2/app-release.apk';
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                    link.click();
-                }
-            }
+            // 获取平台信息
+            const platform = this.getAttribute('data-platform');
+            
+            // 使用统一的下载处理函数
+            handleDownload(platform);
         });
     });
 
@@ -244,6 +222,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 初始化移动端菜单功能
     initializeMobileMenu();
+    
+    // 初始化平台切换功能
+    initializePlatformTabs();
+    
+    // 初始化版本信息
+    initializeVersionInfo();
     
     // 云视频APP介绍页面已加载完成
 });
@@ -483,6 +467,63 @@ function initializeMobileMenu() {
             setTimeout(animateOnScroll, 100);
         }, 250);
     });
+}
+
+// 平台切换功能
+function initializePlatformTabs() {
+    const platformTabs = document.querySelectorAll('.platform-tab');
+    const platformContents = document.querySelectorAll('.platform-content');
+    
+    platformTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetPlatform = this.getAttribute('data-platform');
+            
+            // 移除所有活动状态
+            platformTabs.forEach(t => t.classList.remove('active'));
+            platformContents.forEach(c => c.classList.remove('active'));
+            
+            // 添加当前活动状态
+            this.classList.add('active');
+            
+            // 显示对应的内容
+            const targetContent = document.getElementById(targetPlatform + '-content');
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
+    });
+}
+
+// 版本信息初始化函数
+function initializeVersionInfo() {
+    // 更新所有版本信息显示
+    const versionElements = document.querySelectorAll('[data-version]');
+    versionElements.forEach(element => {
+        const platform = element.getAttribute('data-version');
+        const platformInfo = getPlatformInfo(platform);
+        
+        if (platformInfo) {
+            if (platformInfo.status === 'available') {
+                element.textContent = platformInfo.version;
+            } else if (platformInfo.status === 'coming-soon') {
+                element.textContent = '即将上线';
+            } else {
+                element.textContent = '维护中';
+            }
+        }
+    });
+    
+    // 更新应用信息区域
+    updateAppInfo();
+}
+
+// 更新应用信息区域
+function updateAppInfo() {
+    const androidTvInfo = getPlatformInfo('android-tv');
+    if (androidTvInfo && androidTvInfo.status === 'available') {
+        // 可以在这里更新应用信息，比如下载量等
+        console.log('Android TV版本可用:', androidTvInfo.version);
+    }
 }
 
 // 在主DOMContentLoaded中调用移动端菜单初始化
