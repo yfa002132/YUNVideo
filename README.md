@@ -59,14 +59,24 @@ YUNVideo/
 ├── index.html          # 主页面
 ├── styles.css          # 样式文件
 ├── script.js           # 交互脚本
+├── download-config.js  # 下载链接配置文件
 ├── images/             # 图片资源
-│   ├── video_playback.png
-│   ├── movie_list.png
-│   ├── tv_series_list.png
-│   ├── variety_show_list.png
-│   ├── anime_list.png
-│   ├── playback_details.png
-│   └── documentary_list.png
+│   ├── AndroidTV/      # Android TV 平台截图
+│   │   ├── video_playback.png
+│   │   ├── movie_list.png
+│   │   ├── tv_series_list.png
+│   │   ├── variety_show_list.png
+│   │   ├── anime_list.png
+│   │   ├── playback_details.png
+│   │   ├── documentary_list.png
+│   │   └── Recentlywatched.png
+│   └── AndroidPhone/   # Android 手机平台截图
+│       ├── movie_list.jpg
+│       ├── tv_series_list.jpg
+│       ├── anime_list.jpg
+│       ├── variety_show_list.jpg
+│       ├── documentary_list.jpg
+│       └── playback_details.jpg
 └── README.md           # 项目说明
 ```
 

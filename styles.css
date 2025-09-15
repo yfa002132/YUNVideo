@@ -989,6 +989,21 @@ img {
         gap: 1.5rem;
     }
     
+    /* Android手机截图平板优化 */
+    #android-phone-content .screenshots-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    #android-phone-content .screenshot-card {
+        max-width: 320px;
+    }
+    
+    #android-phone-content .screenshot-card img {
+        height: auto;
+        max-height: 450px;
+    }
+    
     .nav-menu {
         gap: 1rem;
     }
@@ -1088,6 +1103,75 @@ img {
     
     .feature-item {
         justify-content: center;
+    }
+    
+    /* Android手机截图区域特殊样式 */
+#android-phone-content .screenshots-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+#android-phone-content .screenshot-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    overflow: visible; /* 改为visible，让图片可以完全显示 */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 10px; /* 添加内边距 */
+}
+
+#android-phone-content .screenshot-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+#android-phone-content .screenshot-card img {
+    width: 100%;
+    height: auto; /* 让高度自适应 */
+    max-height: 500px; /* 设置最大高度 */
+    object-fit: contain; /* 保持图片比例，完整显示 */
+    background: #000;
+    border-radius: 10px;
+    display: block;
+    object-position: center; /* 图片居中显示 */
+}
+
+#android-phone-content .screenshot-info {
+    padding: 1rem;
+    text-align: center;
+}
+
+#android-phone-content .screenshot-info h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+#android-phone-content .screenshot-info p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+    /* Android手机截图移动端优化 */
+    #android-phone-content .screenshots-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    #android-phone-content .screenshot-card {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    
+    #android-phone-content .screenshot-card img {
+        height: auto;
+        max-height: 400px;
     }
     
     /* 平台截图移动端优化 */
