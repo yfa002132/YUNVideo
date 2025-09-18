@@ -4,20 +4,20 @@
 const DOWNLOAD_CONFIG = {
     // Android TV 版本
     'android-tv': {
-        url: 'https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/release-v1.0.3/app-release.for.android.tv.apk',
-        version: 'v1.0.3',
+        url: 'https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/release-v1.0.4/AndroidTV-1.0.4.apk',
+        version: 'v1.0.4',
         size: '105MB',
         status: 'available', // available, coming-soon, maintenance
-        confirmMessage: '确定开启下载？点击确定立即下载YunVD AndroidTV版'
+        confirmMessage: '确定开启下载？点击确定立即下载YunVD AndroidTV版!'
     },
     
     // Android 手机版本
     'android-phone': {
-        url: 'https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/release-v1.0.3/app-release.for.android.apk', 
-        version: 'v1.0.3',
+        url: 'https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/release-v1.0.4/AndroidPhone-1.0.4.apk', 
+        version: 'v1.0.4',
         size: '78.4MB',
         status: 'available',
-        confirmMessage: '确定开启下载？点击确定立即下载YunVD Android版'
+        confirmMessage: '确定开启下载？点击确定立即下载YunVD Android版!'
     },
     
     // iOS 手机版本
