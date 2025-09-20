@@ -534,52 +534,62 @@ const reviewsData = [
     {
         name: "Alex小明",
         rating: 5,
-        content: "界面设计很现代化，操作流畅不卡顿，视频加载速度超快，强烈推荐！"
+        content: "界面设计很现代化，操作流畅不卡顿，视频加载速度超快，强烈推荐！",
+        gender: "male"
     },
     {
         name: "Rain小雨",
         rating: 5,
-        content: "资源更新速度很快，新剧第一时间就能看到，追剧党的福音！"
+        content: "资源更新速度很快，新剧第一时间就能看到，追剧党的福音！",
+        gender: "female"
     },
     {
         name: "强哥",
         rating: 4,
-        content: "操作简单，遥控器控制很流畅，大屏观看效果震撼，家庭影院首选！"
+        content: "操作简单，遥控器控制很流畅，大屏观看效果震撼，家庭影院首选！",
+        gender: "male"
     },
     {
         name: "Beauty",
         rating: 5,
-        content: "画质超清晰，4K播放毫无压力，而且完全无广告，体验太棒了！"
+        content: "画质超清晰，4K播放毫无压力，而且完全无广告，体验太棒了！",
+        gender: "female"
     },
     {
         name: "Hua华哥",
         rating: 5,
-        content: "支持格式很多，字幕功能很实用，多语言切换很方便，强烈推荐！"
+        content: "支持格式很多，字幕功能很实用，多语言切换很方便，强烈推荐！",
+        gender: "male"
     },
     {
         name: "Tina",
         rating: 4,
-        content: "投屏功能很强大，手机上的视频可以直接投到电视上，太方便了！"
+        content: "投屏功能很强大，手机上的视频可以直接投到电视上，太方便了！",
+        gender: "female"
     },
     {
         name: "Yuan小远",
         rating: 5,
-        content: "海量资源库，电影、电视剧、动漫应有尽有，再也不用到处找资源了！"
+        content: "海量资源库，电影、电视剧、动漫应有尽有，再也不用到处找资源了！",
+        gender: "male"
     },
     {
         name: "Min敏敏",
         rating: 5,
-        content: "界面简洁美观，分类清晰，找视频很容易，用户体验很棒！"
+        content: "界面简洁美观，分类清晰，找视频很容易，用户体验很棒！",
+        gender: "female"
     },
     {
         name: "David大伟",
         rating: 4,
-        content: "播放器很稳定，不会卡顿，快进快退响应很快，看剧体验很好！"
+        content: "播放器很稳定，不会卡顿，快进快退响应很快，看剧体验很好！",
+        gender: "male"
     },
     {
         name: "Fang",
         rating: 5,
-        content: "字幕功能很强大，支持多语言切换，看外语片再也不怕听不懂了！"
+        content: "字幕功能很强大，支持多语言切换，看外语片再也不怕听不懂了！",
+        gender: "female"
     }
 ];
 
@@ -602,11 +612,16 @@ function initializeReviews() {
             i < review.rating ? 'fas fa-star' : 'far fa-star'
         ).map(starClass => `<i class="${starClass}"></i>`).join('');
         
+        // 根据性别选择卡通风格默认头像
+        const avatarUrl = review.gender === 'male' 
+            ? 'https://cdn-icons-png.flaticon.com/512/921/921071.png'  // 男性卡通头像
+            : 'https://cdn-icons-png.flaticon.com/512/921/921124.png'; // 女性卡通头像
+        
         return `
             <div class="review-card">
                 <div class="review-header">
                     <div class="user-info">
-                        <img src="https://via.placeholder.com/50" alt="用户头像">
+                        <img src="${avatarUrl}" alt="用户头像">
                         <div>
                             <h4>${review.name}</h4>
                             <div class="stars">
@@ -642,10 +657,15 @@ function initializeReviews() {
             i < newReviewData.rating ? 'fas fa-star' : 'far fa-star'
         ).map(starClass => `<i class="${starClass}"></i>`).join('');
         
+        // 根据性别选择卡通风格默认头像
+        const avatarUrl = newReviewData.gender === 'male' 
+            ? 'https://cdn-icons-png.flaticon.com/512/921/921071.png'  // 男性卡通头像
+            : 'https://cdn-icons-png.flaticon.com/512/921/921124.png'; // 女性卡通头像
+        
         newReviewElement.innerHTML = `
             <div class="review-header">
                 <div class="user-info">
-                    <img src="https://via.placeholder.com/50" alt="用户头像">
+                    <img src="${avatarUrl}" alt="用户头像">
                     <div>
                         <h4>${newReviewData.name}</h4>
                         <div class="stars">
