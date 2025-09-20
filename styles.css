@@ -680,6 +680,9 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    transform: translateX(0);
+    will-change: opacity, transform;
 }
 
 .review-card {

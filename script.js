@@ -229,6 +229,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化版本信息
     initializeVersionInfo();
     
+    // 初始化用户评价滚动
+    initializeReviews();
+    
     // 云视频APP介绍页面已加载完成
 });
 
@@ -524,6 +527,258 @@ function updateAppInfo() {
         // 可以在这里更新应用信息，比如下载量等
         console.log('Android TV版本可用:', androidTvInfo.version);
     }
+}
+
+// 用户评价数据
+const reviewsData = [
+    {
+        name: "Alex小明",
+        rating: 5,
+        content: "界面设计很现代化，操作流畅不卡顿，视频加载速度超快，强烈推荐！"
+    },
+    {
+        name: "Rain小雨",
+        rating: 5,
+        content: "资源更新速度很快，新剧第一时间就能看到，追剧党的福音！"
+    },
+    {
+        name: "强哥",
+        rating: 4,
+        content: "操作简单，遥控器控制很流畅，大屏观看效果震撼，家庭影院首选！"
+    },
+    {
+        name: "Beauty",
+        rating: 5,
+        content: "画质超清晰，4K播放毫无压力，而且完全无广告，体验太棒了！"
+    },
+    {
+        name: "Hua华哥",
+        rating: 5,
+        content: "支持格式很多，字幕功能很实用，多语言切换很方便，强烈推荐！"
+    },
+    {
+        name: "Tina",
+        rating: 4,
+        content: "投屏功能很强大，手机上的视频可以直接投到电视上，太方便了！"
+    },
+    {
+        name: "Yuan小远",
+        rating: 5,
+        content: "海量资源库，电影、电视剧、动漫应有尽有，再也不用到处找资源了！"
+    },
+    {
+        name: "Min敏敏",
+        rating: 5,
+        content: "界面简洁美观，分类清晰，找视频很容易，用户体验很棒！"
+    },
+    {
+        name: "David大伟",
+        rating: 4,
+        content: "播放器很稳定，不会卡顿，快进快退响应很快，看剧体验很好！"
+    },
+    {
+        name: "Fang",
+        rating: 5,
+        content: "字幕功能很强大，支持多语言切换，看外语片再也不怕听不懂了！"
+    }
+];
+
+// 用户评价滚动功能
+function initializeReviews() {
+    const reviewsContainer = document.getElementById('reviews-container');
+    if (!reviewsContainer) {
+        console.log('用户评价容器未找到');
+        return;
+    }
+    
+    console.log('用户评价滚动功能已初始化');
+    
+    let currentIndex = 0;
+    let isAnimating = false;
+    
+    // 创建评价卡片
+    function createReviewCard(review) {
+        const stars = Array.from({length: 5}, (_, i) => 
+            i < review.rating ? 'fas fa-star' : 'far fa-star'
+        ).map(starClass => `<i class="${starClass}"></i>`).join('');
+        
+        return `
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="user-info">
+                        <img src="https://via.placeholder.com/50" alt="用户头像">
+                        <div>
+                            <h4>${review.name}</h4>
+                            <div class="stars">
+                                ${stars}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>"${review.content}"</p>
+            </div>
+        `;
+    }
+    
+    // 添加单个新评价到右侧
+    function addNewReview(reviewIndex) {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        console.log('开始添加新评价，索引:', reviewIndex);
+        
+        // 获取当前容器引用
+        const currentContainer = window.currentReviewsContainer || reviewsContainer;
+        
+        // 获取当前所有评价卡片
+        const currentCards = currentContainer.querySelectorAll('.review-card');
+        
+        // 创建新的评价卡片元素
+        const newReviewData = reviewsData[reviewIndex % reviewsData.length];
+        const newReviewElement = document.createElement('div');
+        newReviewElement.className = 'review-card';
+        // 生成星级评分
+        const stars = Array.from({length: 5}, (_, i) => 
+            i < newReviewData.rating ? 'fas fa-star' : 'far fa-star'
+        ).map(starClass => `<i class="${starClass}"></i>`).join('');
+        
+        newReviewElement.innerHTML = `
+            <div class="review-header">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/50" alt="用户头像">
+                    <div>
+                        <h4>${newReviewData.name}</h4>
+                        <div class="stars">
+                            ${stars}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>"${newReviewData.content}"</p>
+        `;
+        
+        // 设置新评价的初始位置（在右侧外面）
+        newReviewElement.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: calc(33.333% - 1.33rem);
+            transition: transform 0.6s ease-in-out;
+            transform: translateX(0);
+            z-index: 10;
+        `;
+        
+        // 设置容器为相对定位
+        currentContainer.style.position = 'relative';
+        currentContainer.style.overflow = 'hidden';
+        
+        // 添加新评价到容器
+        currentContainer.appendChild(newReviewElement);
+        
+        // 开始动画：所有现有卡片向左移动，新卡片从右侧进入
+        setTimeout(() => {
+            // 移动所有现有卡片向左
+            currentCards.forEach((card, index) => {
+                card.style.transition = 'transform 0.6s ease-in-out';
+                card.style.transform = `translateX(-${(index + 1) * 100}%)`;
+            });
+            
+            // 新卡片从右侧滑入
+            newReviewElement.style.transform = 'translateX(-300%)';
+        }, 50);
+        
+        // 动画完成后清理
+        setTimeout(() => {
+            // 移除最左侧的卡片（如果超过3个）
+            if (currentCards.length >= 3) {
+                currentContainer.removeChild(currentCards[0]);
+            }
+            
+            // 重置所有卡片的位置和样式
+            const allCards = currentContainer.querySelectorAll('.review-card');
+            allCards.forEach((card) => {
+                card.style.position = 'static';
+                card.style.left = 'auto';
+                card.style.width = 'auto';
+                card.style.transform = 'none';
+                card.style.transition = 'none';
+                card.style.zIndex = 'auto';
+            });
+            
+            isAnimating = false;
+            console.log('单个评价滚动完成');
+        }, 600);
+    }
+    
+    // 显示指定索引的评价
+    function showReviews(startIndex) {
+        if (startIndex === 0) {
+            // 初始化显示3个评价
+            const currentContainer = window.currentReviewsContainer || reviewsContainer;
+            const reviewsToShow = [];
+            for (let i = 0; i < 3; i++) {
+                const index = i % reviewsData.length;
+                reviewsToShow.push(createReviewCard(reviewsData[index]));
+            }
+            currentContainer.innerHTML = reviewsToShow.join('');
+            console.log('初始化显示3个评价');
+        } else {
+            // 添加单个新评价
+            addNewReview(startIndex + 2); // +2 因为要显示第4个评价
+        }
+    }
+    
+    // 自动滚动
+    function autoScroll() {
+        console.log('autoScroll 被调用');
+        
+        // 获取当前容器引用
+        const currentContainer = window.currentReviewsContainer || reviewsContainer;
+        console.log('当前容器:', currentContainer);
+        console.log('容器暂停状态:', currentContainer.dataset.paused);
+        
+        // 检查是否被暂停
+        if (currentContainer.dataset.paused === 'true') {
+            console.log('滚动被暂停，1秒后重试');
+            // 如果被暂停，延迟检查
+            setTimeout(autoScroll, 1000);
+            return;
+        }
+        
+        currentIndex = (currentIndex + 1) % reviewsData.length;
+        console.log('切换到评价索引:', currentIndex);
+        showReviews(currentIndex);
+        
+        // 随机间隔时间 3-8秒
+        const nextDelay = Math.random() * 5000 + 3000; // 3000-8000ms
+        console.log('下次切换时间:', nextDelay + 'ms');
+        setTimeout(autoScroll, nextDelay);
+    }
+    
+    // 初始化显示
+    showReviews(0);
+    
+    // 开始自动滚动 - 缩短初始延迟用于测试
+    console.log('3秒后开始自动滚动');
+    setTimeout(() => {
+        console.log('开始自动滚动');
+        autoScroll();
+    }, 3000);
+    
+    // 鼠标悬停时暂停自动滚动
+    reviewsContainer.addEventListener('mouseenter', () => {
+        reviewsContainer.dataset.paused = 'true';
+        console.log('鼠标进入，暂停滚动');
+    });
+    
+    reviewsContainer.addEventListener('mouseleave', () => {
+        reviewsContainer.dataset.paused = 'false';
+        console.log('鼠标离开，恢复滚动');
+    });
+    
+    // 初始化全局容器引用
+    window.currentReviewsContainer = reviewsContainer;
+    console.log('用户评价滚动功能已初始化');
 }
 
 // 在主DOMContentLoaded中调用移动端菜单初始化
