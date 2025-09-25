@@ -13,8 +13,8 @@ const DOWNLOAD_CONFIG = {
     
     // Android 手机版本
     'android-phone': {
-        url: 'https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/release-v2.0.1/AndroidPhone-release.apk', 
-        version: 'v2.0.1',
+        url: 'https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/Release-2.1.0/AndroidPhone-release.apk', 
+        version: 'v2.1.0',
         size: '78.4MB',
         status: 'available',
         confirmMessage: '确定开启下载？点击确定立即下载YunVD Android版!'
@@ -22,8 +22,8 @@ const DOWNLOAD_CONFIG = {
     
     // iOS 手机版本
     'ios-phone': {
-        url: 'https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/release-v2.0.1/IOSPhone-release.ipa',
-        version: 'v2.0.1',
+        url: 'https://ghfast.top/https://github.com/yfa002132/gnboot/releases/download/Release-2.1.0/myunvd-release.ipa',
+        version: 'v2.1.0',
         size: '10.1MB',
         status: 'available',
         confirmMessage: '确定开启下载？点击确定立即下载YunVD iOS版!',
